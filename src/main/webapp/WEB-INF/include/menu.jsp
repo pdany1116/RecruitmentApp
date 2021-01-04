@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ${pageContext.request.requestURI eq '' ? ' active' : ''}">
-                <a class="nav-link" href="${pageContext.request.contextPath}"> EMPTY <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/Positions"> Positions <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ${activePage eq '' ? 'active' : ''}">
                 <a class="nav-link" href="${pageContext.request.contextPath}">EMPTY</a>

@@ -6,40 +6,41 @@
 package com.mycompany.recruitmentapp.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.sql.Date;
 
 /**
  *
  * @author Dani
  */
 @Entity
-@Table(name = "USERS")
-public class User implements Serializable {
+@Table(name = "CANDIDATES")
+public class Candidate implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    
     private String firstName;
     private String lastName;
     private String phone;
-    private String internalFunction;
-    private String description;
-    private String username;
-    private String email;
-    private String password;
-    private String position;     
+    private String mail;
+    private String address;
+    private String pathCV;
+    private String comment;
+    private Date interviewDate; /* https://vladmihalcea.com/date-timestamp-jpa-hibernate/ */
     
-    @OneToMany(mappedBy = "user")
-    Collection <Position> openPositions;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "POSITION_KEY")
+    private Position position;
 
     public Integer getId() {
         return id;
@@ -47,38 +48,6 @@ public class User implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 
     public String getFirstName() {
@@ -105,28 +74,52 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getInternalFunction() {
-        return internalFunction;
+    public String getMail() {
+        return mail;
     }
 
-    public void setInternalFunction(String internalFunction) {
-        this.internalFunction = internalFunction;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Collection<Position> getOpenPositions() {
-        return openPositions;
+    public String getPathCV() {
+        return pathCV;
     }
 
-    public void setOpenPositions(Collection<Position> openPositions) {
-        this.openPositions = openPositions;
+    public void setPathCV(String pathCV) {
+        this.pathCV = pathCV;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getInterviewDate() {
+        return interviewDate;
+    }
+
+    public void setInterviewDate(Date interviewDate) {
+        this.interviewDate = interviewDate;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override
@@ -139,10 +132,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof Candidate)) {
             return false;
         }
-        User other = (User) object;
+        Candidate other = (Candidate) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -151,6 +144,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.park.parkinglot.entity.User[ id=" + id + " ]";
+        return "com.mycompany.recruitmentapp.entity.Candidate[ id=" + id + " ]";
     }
+    
 }

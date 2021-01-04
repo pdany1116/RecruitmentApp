@@ -15,32 +15,23 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author lucis
+ * @author Dani
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Positions", urlPatterns = {"/Positions"})
+public class Positions extends HttpServlet {
 
-   
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+       request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
     }
 
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("message", "Username or password incorrect");
-        request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
-       
+
     }
 
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
