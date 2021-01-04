@@ -18,9 +18,16 @@
             </li>
         </ul>
         <ul class ="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nal-link" href="${pageContext.request.contextPath}"> Login </a>
-            </li>
-        </ul>
+                <li class="nav-item">
+                    <c:choose>
+                        <c:when test = "${pageContext.request.getRemoteUser() == null}">
+                            <a class="nal-link" href="${pageContext.request.contextPath}/Login"> Login </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="nal-link" href="${pageContext.request.contextPath}/Logout"> Logout </a>
+                        </c:otherwise>
+                    </c:choose>
+                </li>
+            </ul>
     </div>
 </nav>
