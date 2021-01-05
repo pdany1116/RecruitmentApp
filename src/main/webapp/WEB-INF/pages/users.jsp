@@ -3,12 +3,18 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:pageTemplate pageTitle = "JT HR">
-    <h1>Pagina principala JT HR </h1>
+<t:pageTemplate pageTitle = "Users">
+   
+    <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
+    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddUser" role="button"> Add User</a>
+    </c:if>
     <c:forEach var = "user" items = "${users}" varStatus = "status">
         <div class = "row">
             <div class ="col-md-3">
-                ${user.username}
+                ${user.firstname}
+            </div>
+            <div class ="col-md-3">
+                ${user.lastname}
             </div>
             <div class ="col-md-3">
                 ${user.email}

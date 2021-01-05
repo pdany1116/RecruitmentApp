@@ -24,6 +24,21 @@ public class UserBean {
     @PersistenceContext
     private EntityManager entityManager;
 
+    
+    public void createUser(String description, String firstname, String lastname, String internalfunction, String phone, String email, String passwordSha256, String position, String username ){
+        User user = new User();
+        user.setDescription(description);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setInternalFunction(internalfunction);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setPassword(passwordSha256);
+        user.setPosition(position);
+        user.setUsername(username);
+        
+        entityManager.persist(user);
+    }
     public List<UserDetails> getAllUsers() {
         try {
             List<User> users = (List<User>) entityManager.createQuery("SELECT u FROM User u").getResultList();
@@ -37,9 +52,14 @@ public class UserBean {
         List <UserDetails> detailsList = new ArrayList<>();
         for (User user : users) {
             UserDetails userDetails = new UserDetails(user.getId(),
-                    user.getUsername(),
+                    user.getDescription(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getInternalFunction(),
+                    user.getPhone(),
                     user.getEmail(),
-                    user.getPosition());
+                    user.getPosition(),
+                    user.getUsername());
             detailsList.add(userDetails);
         }
         return detailsList;

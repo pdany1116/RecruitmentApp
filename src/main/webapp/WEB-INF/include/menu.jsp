@@ -10,9 +10,12 @@
             <li class="nav-item ${pageContext.request.requestURI eq '' ? ' active' : ''}">
                 <a class="nav-link" href="${pageContext.request.contextPath}/Positions"> Positions <span class="sr-only">(current)</span></a>
             </li>
+            <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
             <li class="nav-item ${activePage eq '' ? 'active' : ''}">
-                <a class="nav-link" href="${pageContext.request.contextPath}">EMPTY</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/Users">Users <span class="sr-only">(current)</span> </a>
             </li>
+            </c:if>
+            
             <li class="nav-item ${activePage eq '' ? 'active' : ''}">
                 <a class="nav-link" href="${pageContext.request.contextPath}">EMPTY</a>
             </li>

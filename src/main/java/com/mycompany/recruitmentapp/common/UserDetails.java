@@ -11,15 +11,25 @@ package com.mycompany.recruitmentapp.common;
  */
 public class UserDetails implements java.io.Serializable {
     private Integer id;
-    private String username;
+    private String description;
+    private String firstname;
+    private String lastname;
+    private String internalfunction;
+    private String phone;
     private String email;
     private String position;
+    private String username;
 
-    public UserDetails(Integer id, String username, String email, String position) {
+    public UserDetails(Integer id, String description, String firstname, String lastname, String internalfunction, String phone, String email, String position, String username) {
         this.id = id;
-        this.username = username;
+        this.description = description;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.internalfunction = internalfunction;
+        this.phone = phone;
         this.email = email;
         this.position = position;
+        this.username = username;
     }
 
     public Integer getId() {
@@ -30,12 +40,44 @@ public class UserDetails implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getInternalfunction() {
+        return internalfunction;
+    }
+
+    public void setInternalfunction(String internalfunction) {
+        this.internalfunction = internalfunction;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -53,6 +95,16 @@ public class UserDetails implements java.io.Serializable {
     public void setPosition(String position) {
         this.position = position;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+   
     
     
     
