@@ -9,6 +9,7 @@ import com.mycompany.recruitmentapp.common.UserDetails;
 import com.mycompany.recruitmentapp.ejb.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
@@ -47,6 +48,20 @@ public class Users extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String [] userIdsAsString = request.getParameterValues("user_ids");
+        if( userIdsAsString != null) {
+            List<Integer> userIds = new ArrayList<> ();
+            for(String userIdAsString : userIdsAsString){
+                userIds.add(Integer.parseInt(userIdAsString));                
+            }
+            userBean.deleteUsersByIds(userIds);
+        }
+        response.sendRedirect(request.getContextPath() + "/Users");
+        
+        
+        
+        
         }
 
 }

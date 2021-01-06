@@ -113,4 +113,12 @@ public class UserBean {
         
         
     }
+
+    public void deleteUsersByIds(List<Integer> userIds) {
+        
+        for (Integer userId : userIds){
+            User user = entityManager.find(User.class, userId);
+        entityManager.remove(user);
+        }
+    }
 }
