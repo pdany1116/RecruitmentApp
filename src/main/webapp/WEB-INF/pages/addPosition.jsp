@@ -63,7 +63,8 @@
                     maxCandidates is required
                 </div>
             </div>
-        </div>       
+        </div>
+        <p>${userId}</p>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button><!-- comment -->
     </form>
         

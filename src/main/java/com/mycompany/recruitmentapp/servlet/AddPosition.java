@@ -5,9 +5,12 @@
  */
 package com.mycompany.recruitmentapp.servlet;
 
+import com.mycompany.recruitmentapp.common.UserDetails;
 import com.mycompany.recruitmentapp.ejb.PositionBean;
+import com.mycompany.recruitmentapp.ejb.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,11 +27,14 @@ import javax.servlet.http.HttpServletResponse;
 public class AddPosition extends HttpServlet {
     
     @Inject
-    PositionBean positionBean;
+    private PositionBean positionBean;
+        
+    private int userId;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        userId = Integer.parseInt(request.getParameter("loggedId"));
         request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
     }
 
@@ -36,19 +42,13 @@ public class AddPosition extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
         String name = request.getParameter("name");
         String department = request.getParameter("department");
         String project = request.getParameter("project");
         String requirements = request.getParameter("requirements");
         String responsibilities = request.getParameter("responsibilities");
-        String state = "Inactive";
         Integer maxCandidates = Integer.parseInt(request.getParameter("maxCandidates"));
-        //Integer userId = Integer.parseInt(request.getParameter("userId"));
-        
-        //positionBean.LOG.info("ID ID ID ID ID = " + request.getSession().getAttribute("username"));
-        //positionBean.createPosition(name, department, project, requirements, responsibilities, maxCandidates, userId);
+        positionBean.createPosition(name, department, project, requirements, responsibilities, maxCandidates, new Integer(userId));
         response.sendRedirect(request.getContextPath()+ "/Positions");
     }
 }

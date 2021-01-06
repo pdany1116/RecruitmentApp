@@ -5,26 +5,43 @@
 
 <t:pageTemplate pageTitle = "JT HR Positions">
     <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
-        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddPosition" role="button">Add Position</a>
+        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddPosition?loggedId=${loggedId}" role="button">Add Position</a>    
     </c:if>
     <c:forEach var = "position" items = "${positions}" varStatus = "status">
+        <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
+            <div class = "row">
+                <div class ="col-md-2">
+                    ${position.name}
+                </div>
+                <div class ="col-md-1">
+                    ${position.maxCandidates}
+                </div>
+                <div class ="col-md-2">
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition" role="button">Edit</a>
+                </div>
+                <div class ="col-md-2">
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition" role="button">Details</a>
+                </div>
+                <div class ="col-md-2">
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ClosePosition" role="button">Close</a>
+                </div>
+                <c:if test="${position.state eq 'Inactive'}">
+                    <div class ="col-md-2">
+                        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ActivatePosition" role="button">Activate</a>
+                    </div>
+                </c:if> 
+            </div>  
+        </c:if>
+        <c:if test="${position.state eq 'Active' &&  not pageContext.request.isUserInRole('AdministratorRole')}">
         <div class = "row">
-            <div class ="col-md-2">
-                ${position.name}
-            </div>
-            <div class ="col-md-1">
-                ${position.maxCandidates}
-            </div>
-            <div class ="col-md-2">
-                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition" role="button">Edit</a>
-            </div>
-            <div class ="col-md-2">
-                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition" role="button">Details</a>
-            </div>
-            <div class ="col-md-2">
-                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ClosePosition" role="button">Close Position</a>
-            </div>
-            
-        </div>
+                <div class ="col-md-2">
+                    ${position.name}
+                </div>
+                <div class ="col-md-1">
+                    ${position.maxCandidates}
+                </div>    
+        </div>    
+        </c:if>   
+
     </c:forEach>
 </t:pageTemplate>

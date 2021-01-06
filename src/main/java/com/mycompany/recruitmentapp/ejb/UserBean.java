@@ -6,8 +6,10 @@
 package com.mycompany.recruitmentapp.ejb;
 
 import com.mycompany.recruitmentapp.common.UserDetails;
+import com.mycompany.recruitmentapp.entity.Position;
 import com.mycompany.recruitmentapp.entity.User;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -38,6 +40,12 @@ public class UserBean {
         user.setUsername(username);
         
         entityManager.persist(user);
+    }
+    
+    public Collection<Position> getOpenPositionsById (Integer userId) {
+        User user = entityManager.find(User.class, userId);
+        Collection<Position> copyOpenPositions = user.getOpenPositions();
+        return copyOpenPositions;
     }
     
     public UserDetails findById (Integer userId) {
