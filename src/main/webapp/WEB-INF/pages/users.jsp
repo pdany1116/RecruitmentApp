@@ -22,6 +22,11 @@
             <div class ="col-md-3">
                 ${user.position}
             </div>
+            
+             <div class="col-md-3">
+                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditUser?id=${user.id}" role="button"> Edit User</a>
+             </div>
+             
         </div>
     </c:forEach>
     

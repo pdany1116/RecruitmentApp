@@ -39,6 +39,24 @@ public class UserBean {
         
         entityManager.persist(user);
     }
+    
+    public UserDetails findById (Integer userId) {
+        User user = entityManager.find(User.class, userId);
+        return new UserDetails (user.getId(), 
+                                user.getDescription(), 
+                                user.getFirstName(), 
+                                user.getLastName(), 
+                                user.getInternalFunction(), 
+                                user.getPhone(), 
+                                user.getEmail(), 
+                                user.getPosition(),
+                                user.getUsername());
+        
+       
+    }
+    
+    
+    
     public List<UserDetails> getAllUsers() {
         try {
             List<User> users = (List<User>) entityManager.createQuery("SELECT u FROM User u").getResultList();
@@ -63,5 +81,28 @@ public class UserBean {
             detailsList.add(userDetails);
         }
         return detailsList;
+    }
+
+
+
+ 
+
+    public void updateUser(Integer userId, String description, String firstname, String lastname, String email, String internalfunction, String phone, String position) {
+        User user = entityManager.find(User.class, userId);
+        user.setDescription(description);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setInternalFunction(internalfunction);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setPosition(position);
+       
+        
+        
+
+        
+        
+        
+        
     }
 }

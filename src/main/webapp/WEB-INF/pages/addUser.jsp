@@ -70,7 +70,7 @@
                 <label for="description">Description</label>
                 <input type="text" class="form-control" id="description" name="description" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                    Phone number is required
+                    Description is required
                 </div>
             </div>
         </div>
