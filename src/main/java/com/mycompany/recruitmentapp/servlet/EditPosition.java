@@ -65,7 +65,7 @@ public class EditPosition extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int positionId = Integer.parseInt(request.getParameter("Id"));
+        int positionId = Integer.parseInt(request.getParameter("positionId"));
         PositionDetails position = positionBean.findById(positionId);
         request.setAttribute("position", position);
         request.getRequestDispatcher("/WEB-INF/pages/editPosition.jsp").forward(request, response);
@@ -91,8 +91,7 @@ public class EditPosition extends HttpServlet {
         Integer maxCandidates = Integer.parseInt(request.getParameter("maxCandidates"));
         Integer positionId = Integer.parseInt(request.getParameter("position_id"));
 
-
-        positionBean.updatePosition( positionId, name, department, project, requirements, responsibilities,maxCandidates,state, positionId);
+        positionBean.updatePosition(positionId, name, department, project, requirements, responsibilities, maxCandidates, state, positionId);
 
         response.sendRedirect(request.getContextPath() + "/Positions");
     }

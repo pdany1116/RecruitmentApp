@@ -59,13 +59,7 @@ public class EditUser extends HttpServlet {
       
         String email = request.getParameter("email");
         Integer userId = Integer.parseInt(request.getParameter("user_id"));
-        
-       
-        
-        
 
-        
-        
         userBean.updateUser(userId, description, firstname, lastname, email, internalfunction, phone, position);
         
         response.sendRedirect(request.getContextPath() + "/Users");

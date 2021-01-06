@@ -17,17 +17,17 @@
                     ${position.maxCandidates}
                 </div>
                 <div class ="col-md-2">
-                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition" role="button">Edit</a>
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition?positionId=${position.id}" role="button">Edit</a>
                 </div>
                 <div class ="col-md-2">
-                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition" role="button">Details</a>
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
                 </div>
                 <div class ="col-md-2">
-                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ClosePosition" role="button">Close</a>
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ClosePosition?positionId=${position.id}" role="button">Close</a>
                 </div>
                 <c:if test="${position.state eq 'Inactive'}">
                     <div class ="col-md-2">
-                        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ActivatePosition" role="button">Activate</a>
+                        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ActivatePosition?positionId=${position.id}" role="button">Activate</a>
                     </div>
                 </c:if> 
             </div>  
