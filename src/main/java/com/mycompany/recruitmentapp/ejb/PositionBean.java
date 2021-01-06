@@ -69,4 +69,30 @@ public class PositionBean {
         }
         return detailsList;
     }
+    
+        public void updatePosition(Integer positionId,String name, String department, String project, String requirements, String responsibilities, Integer maxCandidates, String state, Integer userId) {
+        Position position = entityManager.find(Position.class, positionId);
+        position.setState("Inactive");
+        position.setDepartment(department);
+        position.setMaxCandidates(maxCandidates);
+        position.setName(name);
+        position.setProject(project);
+        position.setRequirements(requirements);
+        position.setResponsibilities(responsibilities);
+      
+    }
+        
+        public PositionDetails findById (Integer positionId) {
+        Position position = entityManager.find(Position.class, positionId);
+        return new PositionDetails (position.getId(), 
+                                position.getName(), 
+                                position.getDepartment(), 
+                                position.getProject(), 
+                                position.getRequirements(), 
+                                position.getResponsibilities(), 
+                                position.getState(), 
+                                position.getMaxCandidates());
+
+
+    }
 }
