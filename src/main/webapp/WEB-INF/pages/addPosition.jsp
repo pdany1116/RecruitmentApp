@@ -27,7 +27,7 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="project">Email</label>
+                <label for="project">Project</label>
                 <input type="text" class="form-control" id="project" name="project" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                     project is required

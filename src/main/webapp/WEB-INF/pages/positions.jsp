@@ -17,6 +17,9 @@
                     ${position.maxCandidates}
                 </div>
                 <div class ="col-md-2">
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddCandidate?positionId=${position.id}" role="button">Add Candidate</a>
+                </div>
+                <div class ="col-md-2">
                     <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition?positionId=${position.id}" role="button">Edit</a>
                 </div>
                 <div class ="col-md-2">

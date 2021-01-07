@@ -6,11 +6,11 @@
 package com.mycompany.recruitmentapp.servlet;
 
 import com.mycompany.recruitmentapp.common.CandidateDetails;
-import com.mycompany.recruitmentapp.common.PositionDetails;
 import com.mycompany.recruitmentapp.ejb.CandidateBean;
 import com.mycompany.recruitmentapp.ejb.PositionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -21,14 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author GI
+ * @author lucis
  */
-@WebServlet(name = "DetailsPosition", urlPatterns = {"/DetailsPosition"})
-public class DetailsPosition extends HttpServlet {
+@WebServlet(name = "AddCandidate", urlPatterns = {"/AddCandidate"})
+public class AddCandidate extends HttpServlet {
 
-    
     @Inject
     private CandidateBean candidateBean;
+    
+    private int positionId;
     
     @Inject
     private PositionBean positionBean;
@@ -41,48 +42,55 @@ public class DetailsPosition extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailsPosition</title>");            
+            out.println("<title>Servlet AddCandidate</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailsPosition at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCandidate at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int positionId = Integer.parseInt(request.getParameter("positionId"));
-        PositionDetails position = positionBean.findById(positionId);
-        request.setAttribute("position", position);
-        List<CandidateDetails> candidates = candidateBean.getAllCandidates();
-        request.setAttribute("candidates", candidates);
-        request.getRequestDispatcher("/WEB-INF/pages/detailsPosition.jsp").forward(request, response);
+        positionId = Integer.parseInt(request.getParameter("positionId"));
+        request.getRequestDispatcher("/WEB-INF/pages/addCandidate.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String mail = request.getParameter("mail");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        Date date = Date.valueOf(request.getParameter("date"));
+        String comment = request.getParameter("comment");
+        String cv = request.getParameter("cv");
+        
+        
+        candidateBean.createCandidate(firstname, lastname, phone, mail, address, cv, comment, date, positionId);
+        
+        int takenPositions = 0;
+        int maxPositions = positionBean.findById(positionId).getMaxCandidates();
+        List<CandidateDetails> candidates = candidateBean.getAllCandidates();
+        
+        for(CandidateDetails candidate : candidates){
+            if(candidate.getPosition().getId().equals(positionId))
+                takenPositions++;
+        }
+        
+        // close position automatically
+        //if(takenPositions == maxPositions)
+            //close
+        response.sendRedirect(request.getContextPath() + "/Positions");
+        
+        
     }
 
     /**

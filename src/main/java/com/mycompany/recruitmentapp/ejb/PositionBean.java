@@ -39,7 +39,7 @@ public class PositionBean {
         position.setResponsibilities(responsibilities);
         
         User user = entityManager.find(User.class, userId);
-        user.getOpenPositions().add(position);
+        //user.getOpenPositions().add(position);
         position.setUser(user);
         
         entityManager.persist(position);
