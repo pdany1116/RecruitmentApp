@@ -72,7 +72,7 @@ public class PositionBean {
     
         public void updatePosition(Integer positionId,String name, String department, String project, String requirements, String responsibilities, Integer maxCandidates, String state, Integer userId) {
         Position position = entityManager.find(Position.class, positionId);
-        position.setState("Inactive");
+       //position.setState("Inactive");
         position.setDepartment(department);
         position.setMaxCandidates(maxCandidates);
         position.setName(name);
@@ -81,6 +81,12 @@ public class PositionBean {
         position.setResponsibilities(responsibilities);
       
     }
+        public void updatePositionState(Integer positionId, String state){
+            
+            Position position = entityManager.find(Position.class, positionId);
+            position.setState(state);
+            
+        }
         
         public PositionDetails findById (Integer positionId) {
         Position position = entityManager.find(Position.class, positionId);

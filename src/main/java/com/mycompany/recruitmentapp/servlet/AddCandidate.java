@@ -86,8 +86,9 @@ public class AddCandidate extends HttpServlet {
         }
         
         // close position automatically
-        //if(takenPositions == maxPositions)
-            //close
+        if(takenPositions == maxPositions)
+            positionBean.updatePositionState(positionId, "Close");
+        
         response.sendRedirect(request.getContextPath() + "/Positions");
         
         
