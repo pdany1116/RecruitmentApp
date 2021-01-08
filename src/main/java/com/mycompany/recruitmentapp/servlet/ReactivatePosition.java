@@ -5,7 +5,6 @@
  */
 package com.mycompany.recruitmentapp.servlet;
 
-import com.mycompany.recruitmentapp.common.PositionDetails;
 import com.mycompany.recruitmentapp.ejb.PositionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,25 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author GI
+ * @author lucis
  */
-@DeclareRoles({"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"}))
-@WebServlet(name = "EditPosition", urlPatterns = {"/EditPosition"})
-public class EditPosition extends HttpServlet {
+@DeclareRoles({"DirectorGeneralRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole"}))
+@WebServlet(name = "ReactivatePosition", urlPatterns = {"/ReactivatePosition"})
+public class ReactivatePosition extends HttpServlet {
 
     @Inject
-    PositionBean positionBean;
-    
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private PositionBean positionBean;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,10 +37,10 @@ public class EditPosition extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditPosition</title>");            
+            out.println("<title>Servlet ActivatePosition</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditPosition at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ActivatePosition at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,34 +60,16 @@ public class EditPosition extends HttpServlet {
             throws ServletException, IOException {
         
         int positionId = Integer.parseInt(request.getParameter("positionId"));
-        PositionDetails position = positionBean.findById(positionId);
-        request.setAttribute("position", position);
-        request.getRequestDispatcher("/WEB-INF/pages/editPosition.jsp").forward(request, response);
+        positionBean.reactivatePosition(positionId);
+        
+        response.sendRedirect(request.getContextPath() + "/Positions");
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String department = request.getParameter("department");
-        String project = request.getParameter("project");
-        String requirements = request.getParameter("requirements");
-        String responsibilities = request.getParameter("responsibilities");
-        String state = "Inactive";
-        Integer maxCandidates = Integer.parseInt(request.getParameter("maxCandidates"));
-        Integer positionId = Integer.parseInt(request.getParameter("position_id"));
-
-        positionBean.updatePosition(positionId, name, department, project, requirements, responsibilities, maxCandidates, state, positionId);
-
-        response.sendRedirect(request.getContextPath() + "/Positions");
+        processRequest(request, response);
     }
 
     /**

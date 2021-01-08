@@ -7,14 +7,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <c:if test="${pageContext.request.isUserInRole('AdministratorRole') || pageContext.request.isUserInRole('DirectorGeneralRole')}">
-                <li class="nav-item ${pageContext.request.requestURI eq '' ? ' active' : ''}">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Positions"> Positions <span class="sr-only">(current)</span></a>
-                </li>
-            </c:if>
-            <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
+            
+            <li class="nav-item ${pageContext.request.requestURI eq '' ? ' active' : ''}">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Positions"> Positions <span class="sr-only">(current)</span></a>
+            </li>
+
+            <c:if test="${pageContext.request.isUserInRole('AdministratorRole') ||
+                          pageContext.request.isUserInRole('DirectorGeneralRole')}">
                 <li class="nav-item ${activePage eq '' ? 'active' : ''}">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Users">Users <span class="sr-only">(current)</span> </a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Users"> Users <span class="sr-only">(current)</span> </a>
                 </li>
             </c:if>
         </ul>

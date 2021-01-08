@@ -27,12 +27,12 @@ public class UserBean {
     private EntityManager entityManager;
 
     
-    public void createUser(String description, String firstname, String lastname, String internalfunction, String phone, String email, String passwordSha256, String position, String username ){
+    public void createUser(String description, String firstName, String lastName, String internalFunction, String phone, String email, String passwordSha256, String position, String username ){
         User user = new User();
         user.setDescription(description);
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setInternalFunction(internalfunction);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setInternalFunction(internalFunction);
         user.setPhone(phone);
         user.setEmail(email);
         user.setPassword(passwordSha256);
@@ -41,13 +41,7 @@ public class UserBean {
         
         entityManager.persist(user);
     }
-    
-    public Collection<Position> getOpenPositionsById (Integer userId) {
-        User user = entityManager.find(User.class, userId);
-        Collection<Position> copyOpenPositions = user.getOpenPositions();
-        return copyOpenPositions;
-    }
-    
+     
     public UserDetails findById (Integer userId) {
         User user = entityManager.find(User.class, userId);
         return new UserDetails (user.getId(), 
@@ -95,12 +89,12 @@ public class UserBean {
 
  
 
-    public void updateUser(Integer userId, String description, String firstname, String lastname, String email, String internalfunction, String phone, String position) {
+    public void updateUser(Integer userId, String description, String firstName, String lastName, String email, String internalFunction, String phone, String position) {
         User user = entityManager.find(User.class, userId);
         user.setDescription(description);
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setInternalFunction(internalfunction);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setInternalFunction(internalFunction);
         user.setPhone(phone);
         user.setEmail(email);
         user.setPosition(position);

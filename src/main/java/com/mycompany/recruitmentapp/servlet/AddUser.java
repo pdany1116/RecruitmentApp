@@ -12,8 +12,11 @@ import com.mycompany.recruitmentapp.util.PasswordUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +26,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lucis
  */
+@DeclareRoles({"AdministratorRole", "DirectorGeneralRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdministratorRole", "DirectorGeneralRole"}))
 @WebServlet(name = "AddUser", urlPatterns = {"/AddUser"})
 public class AddUser extends HttpServlet {
 
-    
     @Inject
     UserBean userBean;
 
@@ -36,36 +40,41 @@ public class AddUser extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/addUser.jsp").forward(request, response);
     }
 
- 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String description = request.getParameter("description");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String internalfunction = request.getParameter("internalfunction");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String internalFunction = request.getParameter("internalFunction");
         String phone = request.getParameter("phone");
         String position = request.getParameter("position");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        
-        int i=1;
-        String username = lastname.substring(0,4) + firstname.substring(0,i);
-        
-        List<UserDetails> users = userBean.getAllUsers();
-        for(UserDetails user:users){
-            if( user.getUsername().equals(username) && i < firstname.length() )
-            {  i++;
-               username = lastname.substring(0,4) + firstname.substring(0,i);
-               
-            } 
+        String username;
+        int i = 1;
+        if (lastName.length() >= 4) {
+            username = lastName.substring(0, 4) + firstName.substring(0, i);
+        } else {
+            username = lastName + firstName.substring(0, i);
         }
-        
-        
+
+        List<UserDetails> users = userBean.getAllUsers();
+        for (UserDetails user : users) {
+            if (user.getUsername().equals(username) && i < firstName.length()) {
+                i++;
+                if (lastName.length() >= 4) {
+                    username = lastName.substring(0, 4) + firstName.substring(0, i);
+                } else {
+                    username = lastName + firstName.substring(0, i);
+                }
+            }
+        }
+
         String passwordSha256 = PasswordUtil.convertToSha256(password);
-        
-        userBean.createUser(description, firstname, lastname, internalfunction, phone, email, passwordSha256, position, username);
-       
-        response.sendRedirect(request.getContextPath()+ "/Users");
+
+        userBean.createUser(description, firstName, lastName, internalFunction, phone, email, passwordSha256, position, username);
+
+        response.sendRedirect(request.getContextPath() + "/Users");
     }
 }

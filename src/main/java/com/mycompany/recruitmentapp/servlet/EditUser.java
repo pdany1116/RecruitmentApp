@@ -10,6 +10,7 @@ import com.mycompany.recruitmentapp.ejb.UserBean;
 import com.mycompany.recruitmentapp.util.PasswordUtil;
 import java.io.IOException;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +18,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ejb.EJBException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 
 /**
  *
  * @author Claudia
  */
+@DeclareRoles({"AdministratorRole", "DirectorGeneralRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdministratorRole", "DirectorGeneralRole"}))
 @WebServlet(name = "EditUser", urlPatterns = {"/EditUser"})
 public class EditUser extends HttpServlet {
     
@@ -51,16 +56,16 @@ public class EditUser extends HttpServlet {
             throws ServletException, IOException {
         
         String description = request.getParameter("description");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String internalfunction = request.getParameter("internalfunction");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String internalFunction = request.getParameter("internalFunction");
         String phone = request.getParameter("phone");
         String position = request.getParameter("position");
       
         String email = request.getParameter("email");
         Integer userId = Integer.parseInt(request.getParameter("user_id"));
 
-        userBean.updateUser(userId, description, firstname, lastname, email, internalfunction, phone, position);
+        userBean.updateUser(userId, description, firstName, lastName, email, internalFunction, phone, position);
         
         response.sendRedirect(request.getContextPath() + "/Users");
 }

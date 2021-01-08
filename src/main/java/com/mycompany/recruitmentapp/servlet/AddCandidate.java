@@ -12,8 +12,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lucis
  */
+
+@DeclareRoles({"RecruiterRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"RecruiterRole"}))
 @WebServlet(name = "AddCandidate", urlPatterns = {"/AddCandidate"})
 public class AddCandidate extends HttpServlet {
 
@@ -64,8 +70,8 @@ public class AddCandidate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String mail = request.getParameter("mail");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
@@ -74,7 +80,7 @@ public class AddCandidate extends HttpServlet {
         String cv = request.getParameter("cv");
         
         
-        candidateBean.createCandidate(firstname, lastname, phone, mail, address, cv, comment, date, positionId);
+        candidateBean.createCandidate(firstName, lastName, phone, mail, address, cv, comment, date, positionId);
         
         int takenPositions = 0;
         int maxPositions = positionBean.findById(positionId).getMaxCandidates();
@@ -87,7 +93,7 @@ public class AddCandidate extends HttpServlet {
         
         // close position automatically
         if(takenPositions == maxPositions)
-            positionBean.updatePositionState(positionId, "Close");
+            positionBean.updatePositionState(positionId, "Closed");
         
         response.sendRedirect(request.getContextPath() + "/Positions");
         

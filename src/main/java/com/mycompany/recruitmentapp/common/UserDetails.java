@@ -12,20 +12,20 @@ package com.mycompany.recruitmentapp.common;
 public class UserDetails implements java.io.Serializable {
     private Integer id;
     private String description;
-    private String firstname;
-    private String lastname;
-    private String internalfunction;
+    private String firstName;
+    private String lastName;
+    private String internalFunction;
     private String phone;
     private String email;
     private String position;
     private String username;
 
-    public UserDetails(Integer id, String description, String firstname, String lastname, String internalfunction, String phone, String email, String position, String username) {
+    public UserDetails(Integer id, String description, String firstName, String lastName, String internalFunction, String phone, String email, String position, String username) {
         this.id = id;
         this.description = description;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.internalfunction = internalfunction;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.internalFunction = internalFunction;
         this.phone = phone;
         this.email = email;
         this.position = position;
@@ -48,28 +48,28 @@ public class UserDetails implements java.io.Serializable {
         this.description = description;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getInternalfunction() {
-        return internalfunction;
+    public String getInternalFunction() {
+        return internalFunction;
     }
 
-    public void setInternalfunction(String internalfunction) {
-        this.internalfunction = internalfunction;
+    public void setInternalFunction(String internalFunction) {
+        this.internalFunction = internalFunction;
     }
 
     public String getPhone() {
@@ -103,9 +103,4 @@ public class UserDetails implements java.io.Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
-   
-    
-    
-    
 }

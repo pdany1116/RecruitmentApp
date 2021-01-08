@@ -7,8 +7,8 @@
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddCandidate">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstname">Firstname</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="" required><!-- comment -->
+                <label for="firstName">Firstname</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                     Firstname is required
                 </div>
@@ -17,8 +17,8 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="lastname">Lastname</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" value="" required><!-- comment -->
+                <label for="lastName">Lastname</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                    Lastname is required
                 </div>

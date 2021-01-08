@@ -17,7 +17,7 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="lastname">department</label>
+                <label for="lastName">department</label>
                 <input type="text" class="form-control" id="department" name="department" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                    department is required

@@ -27,11 +27,11 @@ public class CandidateBean {
     private EntityManager entityManager;
     
     
-    public void createCandidate(String firstname, String lastname, String phone, String mail, String address, String pathCV, String comment, Date interviewDate, Integer positionId){
+    public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String pathCV, String comment, Date interviewDate, Integer positionId){
         
         Candidate candidate = new Candidate();
-        candidate.setFirstName(firstname);
-        candidate.setLastName(lastname);
+        candidate.setFirstName(firstName);
+        candidate.setLastName(lastName);
         candidate.setPhone(phone);
         candidate.setMail(mail);
         candidate.setAddress(address);
@@ -41,13 +41,10 @@ public class CandidateBean {
         
         Position position = entityManager.find(Position.class, positionId);
         candidate.setPosition(position);
-        
+        position.getCandidates().add(candidate);
         entityManager.persist(candidate);
-        
-        
-        
-        
     }
+    
     public List<CandidateDetails> getAllCandidates() {
         try {
             List<Candidate> candidates = (List<Candidate>) entityManager.createQuery("SELECT c FROM Candidate c").getResultList();

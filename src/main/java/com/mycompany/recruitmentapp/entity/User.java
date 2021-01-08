@@ -41,6 +41,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     Collection <Position> openPositions;
 
+
     public Integer getId() {
         return id;
     }
@@ -119,14 +120,6 @@ public class User implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Collection<Position> getOpenPositions() {
-        return openPositions;
-    }
-
-    public void setOpenPositions(Collection<Position> openPositions) {
-        this.openPositions = openPositions;
     }
 
     @Override

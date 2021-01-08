@@ -1,4 +1,9 @@
 package com.mycompany.recruitmentapp.common;
+
+import com.mycompany.recruitmentapp.entity.Candidate;
+import com.mycompany.recruitmentapp.entity.User;
+import java.util.Collection;
+
 /**
  *
  * @author Dani
@@ -12,8 +17,10 @@ public class PositionDetails implements java.io.Serializable {
     private String responsibilities;
     private String state;
     private Integer maxCandidates;   
+    private User user;
+    private Collection<Candidate> candidates;
 
-    public PositionDetails(Integer id, String name, String department, String project, String requirements, String responsibilities, String state, Integer maxCandidates) {
+    public PositionDetails(Integer id, String name, String department, String project, String requirements, String responsibilities, String state, Integer maxCandidates, User user, Collection<Candidate> candidates) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -22,7 +29,11 @@ public class PositionDetails implements java.io.Serializable {
         this.responsibilities = responsibilities;
         this.state = state;
         this.maxCandidates = maxCandidates;
+        this.user = user;
+        this.candidates = candidates;
     }
+
+
     
     public Integer getId() {
         return id;
@@ -86,5 +97,21 @@ public class PositionDetails implements java.io.Serializable {
 
     public void setMaxCandidates(Integer maxCandidates) {
         this.maxCandidates = maxCandidates;
-    }    
+    } 
+    
+        public Collection<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Collection<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

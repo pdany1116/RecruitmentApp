@@ -25,18 +25,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dani
  */
-@DeclareRoles({"AdministratorRole", "DirectorGeneralRole"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdministratorRole", "DirectorGeneralRole"}))
+@DeclareRoles({"AdministratorRole", "DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"})
 
 @WebServlet(name = "Positions", urlPatterns = {"/Positions"})
 public class Positions extends HttpServlet {
 
     @Inject
     private PositionBean positionBean;
-    
+
     @Inject
     UserBean userBean;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,18 +44,27 @@ public class Positions extends HttpServlet {
         
         String username = request.getRemoteUser();
         List<UserDetails> users = userBean.getAllUsers();
-
-        for (UserDetails user : users) {
-            if (username.equals(user.getUsername())) {
-                request.setAttribute("loggedId", user.getId());
+        
+        try { 
+            if (!username.isEmpty()) {
+                for (UserDetails user : users) {
+                    if (username.equals(user.getUsername())) {
+                        request.setAttribute("loggedId", user.getId());
+                    }
+                }
             }
         }
+        catch ( java.lang.NullPointerException ex) {
+          
+        }
+
+
         request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 }

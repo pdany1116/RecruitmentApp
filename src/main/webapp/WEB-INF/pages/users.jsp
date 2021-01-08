@@ -8,9 +8,7 @@
     
     <form method="POST" action="${pageContext.request.contextPath}/Users"> 
    
-    <c:if test="${pageContext.request.isUserInRole('AdministratorRole')}">
     <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddUser" role="button"> Add User</a>
-    </c:if>
     
     <button class="btn btn-danger" type="submit"> Delete Users </button>
     <c:forEach var = "user" items = "${users}" varStatus = "status">
@@ -20,10 +18,10 @@
                 </div>  
                 
             <div class ="col-md-3">
-                ${user.firstname}
+                ${user.firstName}
             </div>
             <div class ="col-md-3">
-                ${user.lastname}
+                ${user.lastName}
             </div>
             <div class ="col-md-3">
                 ${user.email}

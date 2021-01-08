@@ -9,6 +9,8 @@ import com.mycompany.recruitmentapp.common.PositionDetails;
 import com.mycompany.recruitmentapp.entity.Position;
 import com.mycompany.recruitmentapp.entity.User;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
@@ -26,8 +28,6 @@ public class PositionBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public static final Logger LOG = Logger.getLogger(PositionBean.class.getName());
-    
     public void createPosition(String name, String department, String project, String requirements, String responsibilities, Integer maxCandidates, Integer userId) {
         Position position = new Position();
         position.setState("Inactive");
@@ -39,7 +39,6 @@ public class PositionBean {
         position.setResponsibilities(responsibilities);
         
         User user = entityManager.find(User.class, userId);
-        //user.getOpenPositions().add(position);
         position.setUser(user);
         
         entityManager.persist(position);
@@ -47,6 +46,13 @@ public class PositionBean {
     public List<PositionDetails> getAllPositions() {
         try {
             List<Position> positions = (List<Position>) entityManager.createQuery("SELECT u FROM Position u").getResultList();
+            /* Order the list by state */
+            Collections.sort(positions, new Comparator<Position>() {
+                @Override
+                public int compare(final Position position1, final Position position2) {
+                    return position1.getState().compareTo(position2.getState());
+                }
+            });
             return copyPositionsToDetails(positions);
         } catch (Exception ex) {
             throw new EJBException(ex);
@@ -63,7 +69,9 @@ public class PositionBean {
                     position.getRequirements(),
                     position.getResponsibilities(),
                     position.getState(),
-                    position.getMaxCandidates()
+                    position.getMaxCandidates(),
+                    position.getUser(),
+                    position.getCandidates()
             );
             detailsList.add(positionDetails);
         }
@@ -79,6 +87,8 @@ public class PositionBean {
         position.setProject(project);
         position.setRequirements(requirements);
         position.setResponsibilities(responsibilities);
+        
+        
       
     }
         public void updatePositionState(Integer positionId, String state){
@@ -86,6 +96,25 @@ public class PositionBean {
             Position position = entityManager.find(Position.class, positionId);
             position.setState(state);
             
+        }
+        
+        public void reactivatePosition(Integer positionId){
+            
+            Position position = entityManager.find(Position.class, positionId);
+                                
+            Position newPosition = new Position();
+            newPosition.setState("Active");
+            newPosition.setDepartment(position.getDepartment());
+            newPosition.setMaxCandidates(position.getMaxCandidates());
+            newPosition.setName(position.getName());
+            newPosition.setProject(position.getProject());
+            newPosition.setRequirements(position.getRequirements());
+            newPosition.setResponsibilities(position.getResponsibilities());
+
+            User user = entityManager.find(User.class, position.getUser().getId());
+            newPosition.setUser(user);
+
+            entityManager.persist(newPosition);
         }
         
         public PositionDetails findById (Integer positionId) {
@@ -97,7 +126,10 @@ public class PositionBean {
                                 position.getRequirements(), 
                                 position.getResponsibilities(), 
                                 position.getState(), 
-                                position.getMaxCandidates());
+                                position.getMaxCandidates(),
+                                position.getUser(),
+                                position.getCandidates()
+                                        );
 
 
     }

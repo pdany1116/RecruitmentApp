@@ -13,8 +13,8 @@
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditUser">
     <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstname">Firstname</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required value="${user.firstname}" ><!-- comment -->
+                <label for="firstName">Firstname</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required value="${user.firstName}" ><!-- comment -->
                 <div class="invalid-feedback">
                     Firstname is required
                 </div>
@@ -23,8 +23,8 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="lastname">Lastname</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="${user.lastname}" required><!-- comment -->
+                <label for="lastName">Lastname</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" value="${user.lastName}" required><!-- comment -->
                 <div class="invalid-feedback">
                    Lastname is required
                 </div>
@@ -43,8 +43,8 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="internalfunction">Internal function</label>
-                <input type="text" class="form-control" id="internalfunction" name="internalfunction" placeholder="Internal function" value="${user.internalfunction}" required><!-- comment -->
+                <label for="internalFunction">Internal Function</label>
+                <input type="text" class="form-control" id="internalFunction" name="internalFunction" placeholder="Internal function" value="${user.internalFunction}" required><!-- comment -->
                 <div class="invalid-feedback">
                     Internal function is required
                 </div>
@@ -76,13 +76,13 @@
          <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="position">Position</label>
-                <select class="custom-select d-block w-100" id="position" name="position" required>
-                    <option value="">Choose...</option><!-- comment -->
-                    <option value="ADMINISTRATOR">Administrator</option><!-- comment -->
-                    <option value="DIRECTOR_GENERAL">Director General</option>
-                    <option value="DIRECTOR_DEPARTAMENT">Director Departament</option>
-                    <option value="DIRECTOR_HR">Director HR</option><!-- comment -->
-                    <option value="RECRUITER">Recruiter</option><!-- comment --><!-- comment -->
+                <select class="custom-select d-block w-100" id="position" name="position"  required>
+                    <option value="${user.position}">${user.position}</option><!-- comment -->
+                    <option value="ADMINISTRATOR">ADMINISTRATOR</option><!-- comment -->
+                    <option value="DIRECTOR_GENERAL">DIRECTOR_GENERAL</option>
+                    <option value="DIRECTOR_DEPARTAMENT">DIRECTOR_DEPARTAMENT</option>
+                    <option value="DIRECTOR_HR">DIRECTOR_HR</option><!-- comment -->
+                    <option value="RECRUITER">RECRUITER</option><!-- comment --><!-- comment -->
                 </select>
                 <div class="invalid-feedback">
                     Please select a position.

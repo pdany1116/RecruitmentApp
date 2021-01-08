@@ -46,7 +46,7 @@ public class Position implements Serializable {
     @JoinColumn(name = "USER_KEY")
     private User user;
     
-    @OneToMany(mappedBy = "position")
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     private Collection <Candidate> candidates;
 
     public Integer getId() {
