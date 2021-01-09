@@ -66,7 +66,7 @@
                       <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/CommentCandidate?id=${candidate.id}">
                       
                       <input type="text" class="form-control" id="comment" name="comment" placeholder="" value="" required>
-                      
+                      <input type="hidden" id="positionId" name="positionId" value="${positionID}">
                       
                       <button class="btn btn-secondary btn-lg btn-block" type="submit">Add comment</button>
                      

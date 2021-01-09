@@ -67,7 +67,7 @@ public class DetailsPosition extends HttpServlet {
         
         int positionId = Integer.parseInt(request.getParameter("positionId"));
         PositionDetails position = positionBean.findById(positionId);
-        
+        request.setAttribute("positionID", positionId);
         request.setAttribute("position", position);
         
         request.setAttribute("candidates", position.getCandidates());

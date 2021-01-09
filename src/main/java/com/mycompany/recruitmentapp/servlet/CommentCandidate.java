@@ -66,10 +66,11 @@ public class CommentCandidate extends HttpServlet {
         String readComment = request.getParameter("comment");
         newComment = oldComment + "<br> \" - " + readComment + "\" written by <b> "+ request.getRemoteUser() +"</b>";
         
+        String positionId = request.getParameter("positionId");
       
         candidateBean.updateComment(candidateId, newComment);
         
-        response.sendRedirect(request.getContextPath() + "/Positions");
+        response.sendRedirect(request.getContextPath() + "/DetailsPosition?positionId=" + positionId);
         
     }
 
