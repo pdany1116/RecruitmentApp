@@ -26,6 +26,33 @@ public class CandidateBean {
     @PersistenceContext
     private EntityManager entityManager;
     
+    public void updateComment (Integer candidateId, String comment ){
+        
+        Candidate candidate = entityManager.find(Candidate.class, candidateId);
+        candidate.setComment(comment);
+        
+        
+    }
+    public void updatePositionState(Integer positionId, String state){
+            
+            Position position = entityManager.find(Position.class, positionId);
+            position.setState(state);
+            
+        }
+    
+     public CandidateDetails findById (Integer candidateId) {
+        Candidate candidate = entityManager.find(Candidate.class, candidateId);
+        return new CandidateDetails (candidate.getId(), 
+                                candidate.getFirstName(),
+                                candidate.getLastName(),
+                                candidate.getPhone(),
+                                candidate.getMail(),
+                                candidate.getAddress(),
+                                candidate.getPathCV(),
+                                candidate.getComment(),
+                                candidate.getInterviewDate(),
+                                candidate.getPosition());
+    }
     
     public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String pathCV, String comment, Date interviewDate, Integer positionId){
         

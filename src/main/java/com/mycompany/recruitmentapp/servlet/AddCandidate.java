@@ -77,10 +77,11 @@ public class AddCandidate extends HttpServlet {
         String phone = request.getParameter("phone");
         Date date = Date.valueOf(request.getParameter("date"));
         String comment = request.getParameter("comment");
+        String newComment =  "\" - " + comment + "\" written by <b> "+ request.getRemoteUser() +"</b>";
         String cv = request.getParameter("cv");
         
         
-        candidateBean.createCandidate(firstName, lastName, phone, mail, address, cv, comment, date, positionId);
+        candidateBean.createCandidate(firstName, lastName, phone, mail, address, cv, newComment, date, positionId);
         
         int takenPositions = 0;
         int maxPositions = positionBean.findById(positionId).getMaxCandidates();

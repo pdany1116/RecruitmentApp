@@ -34,7 +34,19 @@
                      pageContext.request.isUserInRole('DirectorHRRole') || 
                      pageContext.request.isUserInRole('DirectorDepartamentRole') ||
                      pageContext.request.isUserInRole('AdministratorRole')}">        
-          <h3>Candidati pentru pozitie</h3>
+          <h3>Candidates for position</h3>
+          
+          <div class = "row">
+                  <div class ="col-md-1">
+                      <b> First Name </b>
+                  </div>
+                  <div class ="col-md-1">
+                     <b> Last Name </b>
+                  </div>
+                  <div class="col-md-3">
+                     <b> Comments </b>
+                  </div>
+          </div>
           <c:forEach var = "candidate" items = "${candidates}" varStatus = "status">
               <div class = "row">
                   <div class ="col-md-1">
@@ -43,24 +55,37 @@
                   <div class ="col-md-1">
                       ${candidate.lastName}
                   </div>
-                  <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
-                      <div class="col-md-3">
-                          <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCandidate?id=${canditate.id}" role="button"> Edit Candidate</a>
-                      </div>
-                  </c:if>
-                  <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
-                      <div class="col-md-3">
-                          <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DeleteCanditate?id=${candidate.id}" role="button"> Delete Candidate</a>
-                      </div> 
-                  </c:if>
+                  <div class="col-md-3">
+                      ${candidate.comment}
+                  </div>
                   <c:if test ="${pageContext.request.isUserInRole('RecruiterRole') || 
                                  pageContext.request.isUserInRole('DirectorGeneralRole') ||
                                  pageContext.request.isUserInRole('DirectorHRRole') || 
                                  pageContext.request.isUserInRole('DirectorDepartamentRole')}">
-                        <div class="col-md-3">
-                            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/CommentCanditate?id=${candidate.id}" role="button"> Add Comment</a>
-                        </div> 
+                    <div class="col-md-3">   
+                      <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/CommentCandidate?id=${candidate.id}">
+                      
+                      <input type="text" class="form-control" id="comment" name="comment" placeholder="" value="" required>
+                      
+                      
+                      <button class="btn btn-secondary btn-lg btn-block" type="submit">Add comment</button>
+                     
+                      
+                      </form><!-- comment -->
+                      </div>
                   </c:if>
+                  </form>
+                  <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
+                      <div class="col-md-2">
+                          <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCandidate?id=${canditate.id}" role="button"> Edit Candidate</a>
+                      </div>
+                  </c:if>
+                  <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
+                      <div class="col-md-2">
+                          <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DeleteCanditate?id=${candidate.id}" role="button"> Delete Candidate</a>
+                      </div> 
+                  </c:if>
+                  
               </div>
           </c:forEach>
     </c:if>
