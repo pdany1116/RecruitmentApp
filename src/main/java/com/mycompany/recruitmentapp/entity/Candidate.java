@@ -5,6 +5,7 @@
  */
 package com.mycompany.recruitmentapp.entity;
 
+import com.mycompany.recruitmentapp.entity.CV;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.sql.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,9 +39,11 @@ public class Candidate implements Serializable {
     private String phone;
     private String mail;
     private String address;
-    private String pathCV;
     private String comment;
-    private Date interviewDate; /* https://vladmihalcea.com/date-timestamp-jpa-hibernate/ */
+    private Date interviewDate;
+        
+    @OneToOne(mappedBy = "candidate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CV cv;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POSITION_KEY")
@@ -90,12 +97,12 @@ public class Candidate implements Serializable {
         this.address = address;
     }
 
-    public String getPathCV() {
-        return pathCV;
+    public CV getCv() {
+        return cv;
     }
 
-    public void setPathCV(String pathCV) {
-        this.pathCV = pathCV;
+    public void setCv(CV cv) {
+        this.cv = cv;
     }
 
     public String getComment() {

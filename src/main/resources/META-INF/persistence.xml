@@ -6,6 +6,7 @@
     <class>com.mycompany.recruitmentapp.entity.User</class>
     <class>com.mycompany.recruitmentapp.entity.Position</class>
     <class>com.mycompany.recruitmentapp.entity.Candidate</class>
+    <class>com.mycompany.recruitmentapp.entity.CV</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/JTHR"/>

@@ -3,10 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Add Candidate">
+
     <h1 class="text-center"> Add Candidate </h1>
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddCandidate">
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddCandidate" enctype="multipart/form-data">
         <div class="container">
-        <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="firstName">Firstname</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required><!-- comment -->

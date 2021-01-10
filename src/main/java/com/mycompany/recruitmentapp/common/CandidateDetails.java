@@ -6,6 +6,7 @@
 package com.mycompany.recruitmentapp.common;
 
 import com.mycompany.recruitmentapp.entity.Position;
+import com.mycompany.recruitmentapp.entity.CV;
 import java.sql.Date;
 
 /**
@@ -21,22 +22,22 @@ public class CandidateDetails {
     private String phone;
     private String mail;
     private String address;
-    private String pathCV;
     private String comment;
     private Date interviewDate; /* https://vladmihalcea.com/date-timestamp-jpa-hibernate/ */
     private Position position;
-
-    public CandidateDetails(Integer id, String firstName, String lastName, String phone, String mail, String address, String pathCV, String comment, Date interviewDate, Position position) {
+    private CV cv;
+    
+    public CandidateDetails(Integer id, String firstName, String lastName, String phone, String mail, String address, String comment, Date interviewDate, Position position, CV cv) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.mail = mail;
         this.address = address;
-        this.pathCV = pathCV;
         this.comment = comment;
         this.interviewDate = interviewDate;
         this.position = position;
+        this.cv = cv;
     }
 
     public Position getPosition() {
@@ -46,7 +47,6 @@ public class CandidateDetails {
     public void setPosition(Position position) {
         this.position = position;
     }
-
 
     public Integer getId() {
         return id;
@@ -96,14 +96,6 @@ public class CandidateDetails {
         this.address = address;
     }
 
-    public String getPathCV() {
-        return pathCV;
-    }
-
-    public void setPathCV(String pathCV) {
-        this.pathCV = pathCV;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -118,6 +110,14 @@ public class CandidateDetails {
 
     public void setInterviewDate(Date interviewDate) {
         this.interviewDate = interviewDate;
+    }
+
+    public CV getCv() {
+        return cv;
+    }
+
+    public void setCv(CV cv) {
+        this.cv = cv;
     }
     
 }

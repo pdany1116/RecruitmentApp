@@ -5,6 +5,7 @@
  */
 package com.mycompany.recruitmentapp.ejb;
 
+import com.mycompany.recruitmentapp.entity.CV;
 import com.mycompany.recruitmentapp.common.CandidateDetails;
 import com.mycompany.recruitmentapp.entity.Candidate;
 import com.mycompany.recruitmentapp.entity.Position;
@@ -48,30 +49,38 @@ public class CandidateBean {
                                 candidate.getPhone(),
                                 candidate.getMail(),
                                 candidate.getAddress(),
-                                candidate.getPathCV(),
                                 candidate.getComment(),
                                 candidate.getInterviewDate(),
-                                candidate.getPosition());
+                                candidate.getPosition(),
+                                candidate.getCv()
+        );
     }
     
-    public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String pathCV, String comment, Date interviewDate, Integer positionId){
-        
+    public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String comment, Date interviewDate, Integer positionId, String fileName, String fileType, byte[] fileContent){
         Candidate candidate = new Candidate();
         candidate.setFirstName(firstName);
         candidate.setLastName(lastName);
         candidate.setPhone(phone);
         candidate.setMail(mail);
         candidate.setAddress(address);
-        candidate.setPathCV(pathCV);
         candidate.setComment(comment);
         candidate.setInterviewDate(interviewDate);
+        
+        CV newCv = new CV();
+        newCv.setFileName(fileName);
+        newCv.setFileType(fileType);
+        newCv.setFileContent(fileContent);
+        newCv.setCandidate(candidate);
+        
+        candidate.setCv(newCv);
         
         Position position = entityManager.find(Position.class, positionId);
         candidate.setPosition(position);
         position.getCandidates().add(candidate);
         entityManager.persist(candidate);
+        entityManager.persist(newCv);
     }
-    
+        
     public List<CandidateDetails> getAllCandidates() {
         try {
             List<Candidate> candidates = (List<Candidate>) entityManager.createQuery("SELECT c FROM Candidate c").getResultList();
@@ -90,10 +99,10 @@ public class CandidateBean {
                         candidate.getPhone(),
                         candidate.getMail(),
                         candidate.getAddress(),
-                        candidate.getPathCV(),
                         candidate.getComment(),
                         candidate.getInterviewDate(),
-                        candidate.getPosition()
+                        candidate.getPosition(),
+                        candidate.getCv()
             );
             detailsList.add(candidateDetails);
         }
