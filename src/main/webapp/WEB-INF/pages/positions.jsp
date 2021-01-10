@@ -4,82 +4,99 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle = "JT HR Positions">
+    <div class="container">
     <c:if test = "${  pageContext.request.isUserInRole('RecruiterRole') || 
                       pageContext.request.isUserInRole('DirectorGeneralRole') ||
                       pageContext.request.isUserInRole('DirectorHRRole') || 
                       pageContext.request.isUserInRole('DirectorDepartamentRole')}">
-          <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddPosition?loggedId=${loggedId}" role="button">Add Position</a>    
+          <a class="btn btn-primary" href="${pageContext.request.contextPath}/AddPosition?loggedId=${loggedId}" role="button">Add Position</a>    
     </c:if>
+          
+          <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>max Candidates</th>
+                                <th>User Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
     <c:forEach var = "position" items = "${positions}" varStatus = "status">
+        <tr>
         <c:choose>
             <c:when test = "${  pageContext.request.isUserInRole('RecruiterRole') || 
                                 pageContext.request.isUserInRole('DirectorGeneralRole') ||
                                 pageContext.request.isUserInRole('DirectorHRRole') || 
                                 pageContext.request.isUserInRole('DirectorDepartamentRole')}">
-                    <div class = "row">
-                        <div class ="col-md-2">
+                    <td>
                             ${position.name}
-                        </div>
-                        <div class ="col-md-1">
+                    </td>
+                    <td>
                             ${position.maxCandidates}
-                        </div>
-                        <div class ="col-md-1">
+                    </td>
+                    <td>
                             ${position.user.firstName} ${position.user.lastName}  
-                        </div>
-                        <div class ="col-md-2">
-                            <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
-                        </div>
+                    </td>
+                    <td>
+                            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
+                    </td>
                         <c:if test = "${  pageContext.request.isUserInRole('RecruiterRole') || 
                                           pageContext.request.isUserInRole('DirectorGeneralRole') ||
                                           pageContext.request.isUserInRole('DirectorHRRole') || 
                                           pageContext.request.isUserInRole('DirectorDepartamentRole')}">
-                              <div class ="col-md-2">
-                                  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/EditPosition?positionId=${position.id}" role="button">Edit</a>
-                              </div>
+                              <td>
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditPosition?positionId=${position.id}" role="button">Edit</a>
+                              </td>
                         </c:if>
 
 
                         <c:if test = "${position.state eq 'Active' && pageContext.request.isUserInRole('RecruiterRole')}">
-                            <div class ="col-md-2">
-                                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddCandidate?positionId=${position.id}" role="button">Add Candidate</a>
-                            </div>
+                            <td>
+                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/AddCandidate?positionId=${position.id}" role="button">Add Candidate</a>
+                            </td>
                         </c:if>
                         
                         <c:if test="${position.state eq 'Inactive' && pageContext.request.isUserInRole('DirectorGeneralRole')}">
-                            <div class ="col-md-2">
-                                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ActivatePosition?positionId=${position.id}" role="button">Activate</a>
-                            </div>
+                            <td>
+                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ActivatePosition?positionId=${position.id}" role="button">Activate</a>
+                            </td>
                         </c:if> 
                         <c:if test="${position.state eq 'Closed' && pageContext.request.isUserInRole('DirectorGeneralRole')}">
-                            <div class ="col-md-2">
-                                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ReactivatePosition?positionId=${position.id}" role="button">Reactivate</a>
-                            </div>
+                            <td>
+                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ReactivatePosition?positionId=${position.id}" role="button">Reactivate</a>
+                            </td>
                         </c:if>
                         <c:if test = "${(position.state eq 'Inactive' || position.state eq 'Active') && (pageContext.request.isUserInRole('DirectorGeneralRole'))}">
-                            <div class ="col-md-2">
-                                <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/ClosePosition?positionId=${position.id}" role="button">Close</a>
-                            </div>
+                            <td>
+                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ClosePosition?positionId=${position.id}" role="button">Close</a>
+                            </td>
                         </c:if>
-                    </div>        
+                         
             </c:when>
             <c:when test = "${not pageContext.request.isUserInRole('')}">
                 <c:if test = "${(position.state eq 'Active')}">
-                    <div class = "row">
-                        <div class ="col-md-2">
+                    <td>
                             ${position.name}
-                        </div>
-                        <div class ="col-md-1">
+                    </td>
+                    <td>
                             ${position.maxCandidates}
-                        </div> 
-                        <div class ="col-md-1">
+                    </td> 
+                    <td>
                             ${position.user.firstName} ${position.user.lastName}
-                        </div>
-                        <div class ="col-md-2">
-                            <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
-                        </div>
-                    </div>                     
+                    </td>
+                    <td>
+                            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
+                    </td>
+                                     
                 </c:if>
             </c:when>
         </c:choose>
+                    </tr>
     </c:forEach>
+        
+                    </tbody>
+                    </table>
+          </div>
+    </div>
 </t:pageTemplate>

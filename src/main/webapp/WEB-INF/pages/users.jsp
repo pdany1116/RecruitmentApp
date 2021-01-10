@@ -7,35 +7,35 @@
     
     
     <form method="POST" action="${pageContext.request.contextPath}/Users"> 
-   
-    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddUser" role="button"> Add User</a>
-    
-    <button class="btn btn-danger" type="submit"> Delete Users </button>
-    <c:forEach var = "user" items = "${users}" varStatus = "status">
-        <div class = "row">
-                <div class="col-md">
-                    <input type="checkbox" name="user_ids" value="${user.id}" />
-                </div>  
-                
-            <div class ="col-md-3">
-                ${user.firstName}
-            </div>
-            <div class ="col-md-3">
-                ${user.lastName}
-            </div>
-            <div class ="col-md-3">
-                ${user.email}
-            </div>
-            <div class ="col-md-3">
-                ${user.position}
-            </div>
-            
-             <div class="col-md-3">
-                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditUser?id=${user.id}" role="button"> Edit User</a>
-             </div>
-             
-        </div>
-    </c:forEach>
+        <div class="container">
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/AddUser" role="button"> Add User</a>
+            <button class="btn btn-secondary" type="submit"> Delete Users </button>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var = "user" items = "${users}" varStatus = "status">
+                                <tr>                      
+                                    <td> <input type="checkbox" name="user_ids" value="${user.id}" /> </td>                                
+                                    <td>  ${user.firstName} </td>
+                                    <td>  ${user.lastName} </td>
+                                    <td>  ${user.email} </td>
+                                    <td>  ${user.position} </td>
+                                    <td>  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditUser?id=${user.id}" role="button"> Edit User</a> </td>                           
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table> 
+                </div>       
+        </div>    
     </form> 
     
 </t:pageTemplate>

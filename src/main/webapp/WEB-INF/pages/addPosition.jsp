@@ -3,24 +3,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Add Position">
-    <h1> Add Position </h1>
+    <h1 class="text-center"> Add Position </h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddPosition">
+        <div class="container">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="name">name</label>
+                <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                    name is required
+                    Name is required
                 </div>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="lastName">department</label>
+                <label for="lastName">Department</label>
                 <input type="text" class="form-control" id="department" name="department" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                   department is required
+                   Department is required
                 </div>
             </div>
         </div>
@@ -30,34 +31,34 @@
                 <label for="project">Project</label>
                 <input type="text" class="form-control" id="project" name="project" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                    project is required
+                    Project is required
                 </div>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="requirements">requirements</label>
+                <label for="requirements">Requirements</label>
                 <input type="text" class="form-control" id="requirements" name="requirements" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                    requirements is required
+                    Requirements is required
                 </div>
             </div>
         </div>
         
          <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="responsibilities">responsibilities</label>
+                <label for="responsibilities">Responsibilities</label>
                 <input type="text" class="form-control" id="responsibilities" name="responsibilities" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
-                    Password is required
+                    Responsibilities is required
                 </div>
             </div>
         </div>
                 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="maxCandidates">maxCandidates</label>
+                <label for="maxCandidates">Max Candidates</label>
                 <input type="number" class="form-control" id="maxCandidates" name="maxCandidates" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                     maxCandidates is required
@@ -66,6 +67,7 @@
         </div>
         <p>${userId}</p>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button><!-- comment -->
+        </div>
     </form>
         
 </t:pageTemplate>

@@ -3,8 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Add Position">
-    <h1> Edit Position </h1>
+    <h1 class="text-center"> Edit Position </h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditPosition">
+    <div class="container">
     <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="department">Department</label>
@@ -70,6 +71,7 @@
 
         <input type="hidden" name="position_id" value="${position.id}" />        
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button><!-- comment -->
+    </div>
     </form>
 
 
