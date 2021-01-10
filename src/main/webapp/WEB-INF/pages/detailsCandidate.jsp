@@ -5,45 +5,35 @@
 
 <t:pageTemplate pageTitle = "JT HR Positions">
     <div class="container">
-        <div class="row">
-            <div> Last Name: </div><!-- comment -->
-            <div> ${candidate.lastName} </div>
-        </div>
-
-        <div class="row">
-            <div> First Name: </div><!-- comment -->
-            <div> ${candidate.firstName} </div>
-        </div><!-- comment -->
-
-        <div class="row">
-            <div> Phone: </div><!-- comment -->
-            <div> ${candidate.phone} </div>
-        </div><!-- comment -->
-
-        <div class="row">
-            <div> Mail: </div><!-- comment -->
-            <div> ${candidate.mail} </div>
-        </div><!-- comment -->
-
-        <div class="row">
-            <div> Address: </div><!-- comment -->
-            <div> ${candidate.address} </div>
-        </div>
-
-        <div class="row">
-            <div> Interview Date: </div><!-- comment -->
-            <div> ${candidate.interviewDate} </div>
-        </div>
-
-        <div class="row">
-            <div> Comment: </div><!-- comment -->
-            <div> ${candidate.comment} </div>
-        </div>
-        
-        <div class="row">
-                <td>
-                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ViewCV?id=${candidate.id}" role="button"> View CV</a>
-                </td> 
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th> Phone</th>
+                        <th> Email</th>
+                        <th>Address</th>
+                        <th>Interview Date</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> ${candidate.lastName} </td>
+                        <td> ${candidate.firstName}</td>
+                        <td> ${candidate.phone} </td>
+                        <td> ${candidate.mail} </td>
+                        <td> ${candidate.address}</td>
+                        <td> ${candidate.interviewDate} </td>
+                        <td> ${candidate.comment} </td>
+                        <td>
+                            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ViewCV?id=${candidate.id}" role="button"> View CV</a>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+                
         </div>
     </div>
 </t:pageTemplate>

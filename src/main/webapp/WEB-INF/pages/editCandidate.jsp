@@ -3,8 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Edit Candidate">
-    <h1> Edit Candidate </h1>
+    <h1 class="text-center"> Edit Candidate </h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditCandidate">
+        <div class="container">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
@@ -59,7 +60,7 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="date">Date</label>
+                <label for="date">Interview Date</label>
                 <input type="date" class="form-control" id="date" name="date" placeholder="" value="${candidate.interviewDate}" required><!-- comment -->
                 <div class="invalid-feedback">
                     Date is required
@@ -70,6 +71,7 @@
       
         <input type="hidden" id="candidateId" name="candidateId" value="${candidate.id}" />  
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button><!-- comment -->
+        </div>
     </form>
 
 </t:pageTemplate>

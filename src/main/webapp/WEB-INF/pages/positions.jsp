@@ -17,8 +17,8 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>max Candidates</th>
-                                <th>User Name</th>
+                                <th>Candidates</th>
+                                <th>Author</th>
                             </tr>
                         </thead>
                         <tbody>

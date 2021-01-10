@@ -7,14 +7,15 @@
     <h1 class="text-center"> Add Candidate </h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddCandidate" enctype="multipart/form-data">
         <div class="container">
-            <div class="col-md-6 mb-3">
-                <label for="firstName">Firstname</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required><!-- comment -->
-                <div class="invalid-feedback">
-                    Firstname is required
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Firstname</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required><!-- comment -->
+                    <div class="invalid-feedback">
+                        Firstname is required
+                    </div>
                 </div>
             </div>
-        </div>
         
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -60,7 +61,7 @@
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="date">Date</label>
+                <label for="date">Interview Date</label>
                 <input type="date" class="form-control" id="date" name="date" placeholder="" value="" required><!-- comment -->
                 <div class="invalid-feedback">
                     Date is required

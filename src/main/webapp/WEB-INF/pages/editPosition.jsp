@@ -6,7 +6,16 @@
     <h1 class="text-center"> Edit Position </h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditPosition">
     <div class="container">
-    <div class="row">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="${position.name}" required><!-- comment -->
+                <div class="invalid-feedback">
+                    Name is required
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="department">Department</label>
                 <input type="text" class="form-control" id="department" name="department" placeholder="Department" required value="${position.department}" ><!-- comment -->
@@ -15,6 +24,33 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="project">Project</label>
+                <input type="text" class="form-control" id="project" name="project" placeholder="Project" value="${position.project}" required><!-- comment -->
+                <div class="invalid-feedback">
+                    Project is required
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="requirements">Requirements</label>
+                <input type="text" class="form-control" id="requirements" name="requirements" placeholder="Requirements" value="${position.requirements}" required><!-- comment -->
+                <div class="invalid-feedback">
+                    Requirements is required
+                </div>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="responsibilities">Responsibilities</label>
+                <input type="text" class="form-control" id="responsibilities" name="responsibilities" placeholder="Responsibilities" value="${position.responsibilities}" required><!-- comment -->
+                <div class="invalid-feedback">
+                    Responsibilities are required
+                </div>
+            </div>
+        </div>        
 
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -25,49 +61,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="${position.name}" required><!-- comment -->
-                <div class="invalid-feedback">
-                    Name is required
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="project">Project</label>
-                <input type="text" class="form-control" id="project" name="project" placeholder="Project" value="${position.project}" required><!-- comment -->
-                <div class="invalid-feedback">
-                    Project is required
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="requirements">Requirements</label>
-                <input type="text" class="form-control" id="requirements" name="requirements" placeholder="Requirements" value="${position.requirements}" required><!-- comment -->
-                <div class="invalid-feedback">
-                    Requirements is required
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="responsibilities">Responsibilities</label>
-                <input type="text" class="form-control" id="responsibilities" name="responsibilities" placeholder="Responsibilities" value="${position.responsibilities}" required><!-- comment -->
-                <div class="invalid-feedback">
-                    Responsibilities are required
-                </div>
-            </div>
-        </div>
-
 
         <input type="hidden" name="position_id" value="${position.id}" />        
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button><!-- comment -->

@@ -66,9 +66,9 @@
                                                  pageContext.request.isUserInRole('DirectorDepartamentRole')}">
 
                               <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/CommentCandidate?id=${candidate.id}">
-                                  <td><input type="text" class="form-control" id="comment" name="comment" placeholder="" value="" required></td>
+                                  <td><input type="text" class="form-control" id="comment" name="comment" placeholder="" value="" required>
                                   <input type="hidden" id="positionId" name="positionId" value="${positionID}">
-                                  <td> <button class="btn btn-secondary btn-lg btn-block" type="submit">Add comment</button> </td>
+                                   <button class="btn btn-secondary btn-block" type="submit">Add comment</button> </td>
                               </form> 
 
                           </c:if>
