@@ -6,7 +6,10 @@
 package com.mycompany.recruitmentapp.servlet;
 
 import com.mycompany.recruitmentapp.common.CandidateDetails;
+import com.mycompany.recruitmentapp.common.PositionDetails;
 import com.mycompany.recruitmentapp.ejb.CandidateBean;
+import com.mycompany.recruitmentapp.ejb.PositionBean;
+import com.mycompany.recruitmentapp.entity.Candidate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.security.DeclareRoles;
@@ -23,15 +26,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lucis
  */
-@DeclareRoles({"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"}))
-@WebServlet(name = "CommentCandidate", urlPatterns = {"/CommentCandidate"})
-public class CommentCandidate extends HttpServlet {
+@DeclareRoles({"DirectorGeneralRole","RecruiterRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole","RecruiterRole"}))
+@WebServlet(name = "DeleteCandidate", urlPatterns = {"/DeleteCandidate"})
+public class DeleteCandidate extends HttpServlet {
 
+    
     @Inject
-    private CandidateBean candidateBean;
+    CandidateBean candidateBean;
     
-    
+   
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,10 +45,10 @@ public class CommentCandidate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CommentCandidate</title>");            
+            out.println("<title>Servlet deleteCandidate</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CommentCandidate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet deleteCandidate at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,31 +58,25 @@ public class CommentCandidate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        //candidateId = Integer.parseInt(request.getParameter("id"));
-        
+                
+            
     }
 
-    
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int candidateId = Integer.parseInt(request.getParameter("id"));
-        CandidateDetails candidate = candidateBean.findById(candidateId);
-        String oldComment = candidate.getComment();
-        String newComment;
-        String readComment = request.getParameter("comment");
-        newComment = oldComment + "<br> \" - " + readComment + "\" written by <b> "+ request.getRemoteUser() +"</b>";
+            
+            int candidateId = Integer.parseInt(request.getParameter("candidateId"));
+            
+            Integer positionId = Integer.parseInt(request.getParameter("positionId"));
         
-        String positionId = request.getParameter("positionId");
-      
-        candidateBean.updateComment(candidateId, newComment);
+            candidateBean.deleteCandidateById(candidateId, positionId);
         
-        response.sendRedirect(request.getContextPath() + "/DetailsPosition?positionId=" + positionId);
-        
+            response.sendRedirect(request.getContextPath() + "/DetailsPosition?positionId=" + positionId);
     }
 
+    
     @Override
     public String getServletInfo() {
         return "Short description";

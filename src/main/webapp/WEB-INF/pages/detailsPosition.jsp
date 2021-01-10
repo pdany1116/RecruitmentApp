@@ -10,10 +10,10 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Departament</th>
+                        <th>Department</th>
                         <th>Project</th>
                         <th>Requirements</th>
-                        <th>Responsabilities</th>
+                        <th>Responsibilities</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,30 +55,49 @@
                                                  pageContext.request.isUserInRole('DirectorGeneralRole') ||
                                                  pageContext.request.isUserInRole('DirectorHRRole') || 
                                                  pageContext.request.isUserInRole('DirectorDepartamentRole')}">
+                                        <td>
+                                            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DetailsCandidate?candidateId=${candidate.id}" role="button"> Details </a>
+                                        </td>    
+
+                                  </c:if>
+                                  <c:if test ="${pageContext.request.isUserInRole('RecruiterRole') || 
+                                                 pageContext.request.isUserInRole('DirectorGeneralRole') ||
+                                                 pageContext.request.isUserInRole('DirectorHRRole') || 
+                                                 pageContext.request.isUserInRole('DirectorDepartamentRole')}">
 
                               <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/CommentCandidate?id=${candidate.id}">
                                   <td><input type="text" class="form-control" id="comment" name="comment" placeholder="" value="" required></td>
                                   <input type="hidden" id="positionId" name="positionId" value="${positionID}">
                                   <td> <button class="btn btn-secondary btn-lg btn-block" type="submit">Add comment</button> </td>
-                              </form>  
+                              </form> 
+
                           </c:if>
 
                           <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
+
+
                               <td>
-                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCandidate?id=${canditate.id}" role="button"> Edit </a>
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCandidate?candidateId=${candidate.id}&positionId=${positionID}" role="button"> Edit </a>
                               </td>
                           </c:if>
-                          <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
-                              <td>
-                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DeleteCanditate?id=${candidate.id}" role="button"> Delete </a>
-                              </td> 
+                          <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole') && position.state eq 'Active' }">
+                              <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/DeleteCandidate?candidateId=${candidate.id}">
+                                  <input type="hidden" id="positionId" name="positionId" value="${positionID}">
+                                  <td> <button class="btn btn-secondary btn-lg btn-block" type="submit">Delete</button> </td>
+                              </form> 
+
+
                           </c:if>
-                          <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole')}">
-                              <td>
-                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ViewCV?id=${candidate.id}" role="button"> View CV</a>
-                              </td> 
+                          <c:if test ="${pageContext.request.isUserInRole('RecruiterRole') || 
+                                         pageContext.request.isUserInRole('DirectorGeneralRole') ||
+                                         pageContext.request.isUserInRole('DirectorHRRole') || 
+                                         pageContext.request.isUserInRole('DirectorDepartamentRole')}">
+                                <td>
+                                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ViewCV?id=${candidate.id}" role="button"> View CV</a>
+                                </td> 
                           </c:if>
                           </tr>
+                          </form> 
                       </c:forEach>
                       </tbody>
                   </table>

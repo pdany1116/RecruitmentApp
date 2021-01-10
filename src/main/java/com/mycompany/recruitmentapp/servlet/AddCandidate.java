@@ -31,8 +31,8 @@ import javax.servlet.http.Part;
  */
 
 @MultipartConfig
-@DeclareRoles({"RecruiterRole"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"RecruiterRole"}))
+@DeclareRoles({"DirectorGeneralRole","RecruiterRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole","RecruiterRole"}))
 @WebServlet(name = "AddCandidate", urlPatterns = {"/AddCandidate"})
 public class AddCandidate extends HttpServlet {
 

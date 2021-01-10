@@ -7,16 +7,11 @@ package com.mycompany.recruitmentapp.servlet;
 
 import com.mycompany.recruitmentapp.common.CandidateDetails;
 import com.mycompany.recruitmentapp.ejb.CandidateBean;
-import com.mycompany.recruitmentapp.entity.Candidate;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -27,16 +22,18 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Dani
+ * @author lucis
  */
-@DeclareRoles({"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"DirectorGeneralRole", "DirectorHRRole", "DirectorDepartamentRole", "RecruiterRole"}))
-@WebServlet(name = "ViewCV", urlPatterns = {"/ViewCV"})
-public class ViewCV extends HttpServlet {
+@DeclareRoles({"RecruiterRole"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"RecruiterRole"}))
+@WebServlet(name = "EditCandidate", urlPatterns = {"/EditCandidate"})
+public class EditCandidate extends HttpServlet {
 
+    
     @Inject
     CandidateBean candidateBean;
-
+    
+    private String positionId;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,10 +51,10 @@ public class ViewCV extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DownloadCV</title>");
+            out.println("<title>Servlet EditCandidate</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DownloadCV at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditCandidate at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,22 +72,11 @@ public class ViewCV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        CandidateDetails candidate = candidateBean.findById(id);
-        
-        response.setContentType(candidate.getCv().getFileType());
-        response.setContentLength(candidate.getCv().getFileContent().length);
-        response.getOutputStream().write(candidate.getCv().getFileContent());
-        
-        PrintWriter out = response.getWriter();
-        FileInputStream fileInputStream = new FileInputStream(candidate.getCv().getFileName());
-
-        int i;
-        while ((i = fileInputStream.read()) != -1) {
-            out.write(i);
-        }
-        fileInputStream.close();
-        out.close();
+        int candidateId = Integer.parseInt(request.getParameter("candidateId"));
+        positionId = request.getParameter("positionId");
+        CandidateDetails candidate = candidateBean.findById(candidateId);
+        request.setAttribute("candidate", candidate);
+        request.getRequestDispatcher("/WEB-INF/pages/editCandidate.jsp").forward(request, response);
     }
 
     /**
@@ -104,7 +90,21 @@ public class ViewCV extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String mail = request.getParameter("mail");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String date = request.getParameter("date");
+        Date d=Date.valueOf(date);
+        
+        
+        Integer candidateId = Integer.parseInt(request.getParameter("candidateId"));
+        
+        candidateBean.updateCandidate(candidateId, firstName, lastName, phone, mail, address, d);
+        
+        response.sendRedirect(request.getContextPath() + "/DetailsPosition?positionId=" + positionId);
+       
     }
 
     /**

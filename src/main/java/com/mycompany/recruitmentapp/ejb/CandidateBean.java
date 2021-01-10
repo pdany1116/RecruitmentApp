@@ -27,6 +27,32 @@ public class CandidateBean {
     @PersistenceContext
     private EntityManager entityManager;
     
+    
+    public void deleteCandidateById(Integer candidateId, Integer positionId) {
+        
+        
+            Candidate candidate = entityManager.find(Candidate.class, candidateId);
+            Position position = entityManager.find(Position.class, positionId);
+            position.getCandidates().remove(candidate);
+            
+            entityManager.remove(candidate);
+        
+    }
+    
+    
+    public void updateCandidate(Integer candidateId, String firstName, String lastName, String phone, String mail, String address, Date interviewDate) {
+
+        Candidate candidate = entityManager.find(Candidate.class, candidateId);
+        candidate.setFirstName(firstName);
+        candidate.setLastName(lastName);
+        candidate.setPhone(phone);
+        candidate.setMail(mail);
+        candidate.setAddress(address);
+
+        candidate.setInterviewDate(interviewDate);
+
+    }
+    
     public void updateComment (Integer candidateId, String comment ){
         
         Candidate candidate = entityManager.find(Candidate.class, candidateId);
