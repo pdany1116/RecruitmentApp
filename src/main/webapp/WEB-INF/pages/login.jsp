@@ -11,14 +11,16 @@
         </div>
     </c:if>
     
-    <form class="form-signin" method="POST" action="j_security_check">
-        <h1 class="text-center">Sign in</h1>
-        <div class="container">
-            <label for="username" class="sr-only">Username</label>
-            <input type="text" id="username" name="j_username" class="form-control" placeholder="Username" required autofocus>
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="j_password" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </div>
-    </form>
+    <div class="d-flex justify-content-center align-items-center">
+        <form class="form-signin" method="POST" action="j_security_check">
+            <div style="width: 400px; padding-top: 70px;">
+                <h1 class="text-center" style="padding-bottom: 30px;">Sign in</h1>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="j_username" class="form-control" placeholder="Username" required autofocus>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="j_password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </div>
+        </form>
+    </div>
 </t:pageTemplate>

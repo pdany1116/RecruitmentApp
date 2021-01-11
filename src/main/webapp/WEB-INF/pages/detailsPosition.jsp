@@ -83,7 +83,7 @@
                           <c:if test ="${  pageContext.request.isUserInRole('RecruiterRole') && position.state eq 'Active' }">
                               <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/DeleteCandidate?candidateId=${candidate.id}">
                                   <input type="hidden" id="positionId" name="positionId" value="${positionID}">
-                                  <td> <button class="btn btn-secondary btn-lg btn-block" type="submit">Delete</button> </td>
+                                  <td> <button class="btn btn-secondary btn-block" type="submit">Delete</button> </td>
                               </form> 
 
 
