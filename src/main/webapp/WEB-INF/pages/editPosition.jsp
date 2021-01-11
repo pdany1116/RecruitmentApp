@@ -16,6 +16,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="department">Department</label>
@@ -25,6 +26,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="project">Project</label>
@@ -34,6 +36,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="requirements">Requirements</label>
@@ -43,6 +46,7 @@
                         </div>
                     </div>
                 </div>  
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="responsibilities">Responsibilities</label>
@@ -58,21 +62,18 @@
                         <label for="maxCandidates">Max candidates</label>
                         <input type="integer" class="form-control" id="maxCandidates" name="maxCandidates" placeholder="max candidates" value="${position.maxCandidates}" required><!-- comment -->
                         <div class="invalid-feedback">
-                           Max candidates is required
+                            Max candidates is required
                         </div>
                     </div>
                 </div>
 
                 <input type="hidden" name="position_id" value="${position.id}" />      
                 <div style="padding-left: 70px;" >
-                     <div class="col-md-4 ">
+                    <div class="col-md-4 ">
                         <button class="btn btn-primary  btn-block" type="submit">Save</button>
                     </div>
                 </div>    
             </div>
         </form>
     </div>
-
-
-
 </t:pageTemplate>     

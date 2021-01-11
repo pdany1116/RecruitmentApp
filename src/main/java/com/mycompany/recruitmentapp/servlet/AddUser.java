@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.servlet;
 
 import com.mycompany.recruitmentapp.common.UserDetails;
 import com.mycompany.recruitmentapp.ejb.UserBean;
-import com.mycompany.recruitmentapp.entity.User;
 import com.mycompany.recruitmentapp.util.PasswordUtil;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;

@@ -16,7 +16,7 @@ public class PositionDetails implements java.io.Serializable {
     private String requirements;
     private String responsibilities;
     private String state;
-    private Integer maxCandidates;   
+    private Integer maxCandidates;
     private User user;
     private Collection<Candidate> candidates;
 
@@ -33,8 +33,6 @@ public class PositionDetails implements java.io.Serializable {
         this.candidates = candidates;
     }
 
-
-    
     public Integer getId() {
         return id;
     }
@@ -97,9 +95,9 @@ public class PositionDetails implements java.io.Serializable {
 
     public void setMaxCandidates(Integer maxCandidates) {
         this.maxCandidates = maxCandidates;
-    } 
-    
-        public Collection<Candidate> getCandidates() {
+    }
+
+    public Collection<Candidate> getCandidates() {
         return candidates;
     }
 

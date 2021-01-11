@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.entity;
 
 import com.mycompany.recruitmentapp.entity.CV;
@@ -17,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.sql.Date;
 import javax.persistence.CascadeType;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 /**
  *
@@ -33,7 +26,7 @@ public class Candidate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
+
     private String firstName;
     private String lastName;
     private String phone;
@@ -41,10 +34,10 @@ public class Candidate implements Serializable {
     private String address;
     private String comment;
     private Date interviewDate;
-        
+
     @OneToOne(mappedBy = "candidate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CV cv;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POSITION_KEY")
     private Position position;
@@ -153,5 +146,4 @@ public class Candidate implements Serializable {
     public String toString() {
         return "com.mycompany.recruitmentapp.entity.Candidate[ id=" + id + " ]";
     }
-    
 }

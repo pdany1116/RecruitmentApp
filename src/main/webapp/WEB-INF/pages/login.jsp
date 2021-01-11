@@ -1,16 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle = "JT HR">
-    
-   <c:if test="${message != null}">
+    <c:if test="${message != null}">
         <div class="alert alert-warning" role="alert">
             ${message}
         </div>
     </c:if>
-    
+
     <div class="d-flex justify-content-center align-items-center">
         <form class="form-signin" method="POST" action="j_security_check">
             <div style="width: 400px; padding-top: 70px;">

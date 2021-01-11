@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,11 +30,10 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String password;
-    private String position;     
-    
-    @OneToMany(mappedBy = "user")
-    Collection <Position> openPositions;
+    private String position;
 
+    @OneToMany(mappedBy = "user")
+    Collection<Position> openPositions;
 
     public Integer getId() {
         return id;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.ejb;
 
 import com.mycompany.recruitmentapp.entity.CV;
@@ -26,20 +21,17 @@ public class CandidateBean {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
-    
+
     public void deleteCandidateById(Integer candidateId, Integer positionId) {
-        
-        
-            Candidate candidate = entityManager.find(Candidate.class, candidateId);
-            Position position = entityManager.find(Position.class, positionId);
-            position.getCandidates().remove(candidate);
-            
-            entityManager.remove(candidate);
-        
+
+        Candidate candidate = entityManager.find(Candidate.class, candidateId);
+        Position position = entityManager.find(Position.class, positionId);
+        position.getCandidates().remove(candidate);
+
+        entityManager.remove(candidate);
+
     }
-    
-    
+
     public void updateCandidate(Integer candidateId, String firstName, String lastName, String phone, String mail, String address, Date interviewDate) {
 
         Candidate candidate = entityManager.find(Candidate.class, candidateId);
@@ -52,37 +44,37 @@ public class CandidateBean {
         candidate.setInterviewDate(interviewDate);
 
     }
-    
-    public void updateComment (Integer candidateId, String comment ){
-        
+
+    public void updateComment(Integer candidateId, String comment) {
+
         Candidate candidate = entityManager.find(Candidate.class, candidateId);
         candidate.setComment(comment);
-        
-        
+
     }
-    public void updatePositionState(Integer positionId, String state){
-            
-            Position position = entityManager.find(Position.class, positionId);
-            position.setState(state);
-            
-        }
-    
-     public CandidateDetails findById (Integer candidateId) {
+
+    public void updatePositionState(Integer positionId, String state) {
+
+        Position position = entityManager.find(Position.class, positionId);
+        position.setState(state);
+
+    }
+
+    public CandidateDetails findById(Integer candidateId) {
         Candidate candidate = entityManager.find(Candidate.class, candidateId);
-        return new CandidateDetails (candidate.getId(), 
-                                candidate.getFirstName(),
-                                candidate.getLastName(),
-                                candidate.getPhone(),
-                                candidate.getMail(),
-                                candidate.getAddress(),
-                                candidate.getComment(),
-                                candidate.getInterviewDate(),
-                                candidate.getPosition(),
-                                candidate.getCv()
+        return new CandidateDetails(candidate.getId(),
+                candidate.getFirstName(),
+                candidate.getLastName(),
+                candidate.getPhone(),
+                candidate.getMail(),
+                candidate.getAddress(),
+                candidate.getComment(),
+                candidate.getInterviewDate(),
+                candidate.getPosition(),
+                candidate.getCv()
         );
     }
-    
-    public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String comment, Date interviewDate, Integer positionId, String fileName, String fileType, byte[] fileContent){
+
+    public void createCandidate(String firstName, String lastName, String phone, String mail, String address, String comment, Date interviewDate, Integer positionId, String fileName, String fileType, byte[] fileContent) {
         Candidate candidate = new Candidate();
         candidate.setFirstName(firstName);
         candidate.setLastName(lastName);
@@ -91,22 +83,22 @@ public class CandidateBean {
         candidate.setAddress(address);
         candidate.setComment(comment);
         candidate.setInterviewDate(interviewDate);
-        
+
         CV newCv = new CV();
         newCv.setFileName(fileName);
         newCv.setFileType(fileType);
         newCv.setFileContent(fileContent);
         newCv.setCandidate(candidate);
-        
+
         candidate.setCv(newCv);
-        
+
         Position position = entityManager.find(Position.class, positionId);
         candidate.setPosition(position);
         position.getCandidates().add(candidate);
         entityManager.persist(candidate);
         entityManager.persist(newCv);
     }
-        
+
     public List<CandidateDetails> getAllCandidates() {
         try {
             List<Candidate> candidates = (List<Candidate>) entityManager.createQuery("SELECT c FROM Candidate c").getResultList();
@@ -115,24 +107,23 @@ public class CandidateBean {
             throw new EJBException(ex);
         }
     }
-    
+
     public List<CandidateDetails> copyCandidatesToDetails(List<Candidate> candidates) {
-        List <CandidateDetails> detailsList = new ArrayList<>();
+        List<CandidateDetails> detailsList = new ArrayList<>();
         for (Candidate candidate : candidates) {
-            CandidateDetails candidateDetails = new CandidateDetails( candidate.getId(),
-                        candidate.getFirstName(),
-                        candidate.getLastName(),
-                        candidate.getPhone(),
-                        candidate.getMail(),
-                        candidate.getAddress(),
-                        candidate.getComment(),
-                        candidate.getInterviewDate(),
-                        candidate.getPosition(),
-                        candidate.getCv()
+            CandidateDetails candidateDetails = new CandidateDetails(candidate.getId(),
+                    candidate.getFirstName(),
+                    candidate.getLastName(),
+                    candidate.getPhone(),
+                    candidate.getMail(),
+                    candidate.getAddress(),
+                    candidate.getComment(),
+                    candidate.getInterviewDate(),
+                    candidate.getPosition(),
+                    candidate.getCv()
             );
             detailsList.add(candidateDetails);
         }
         return detailsList;
     }
-    
 }

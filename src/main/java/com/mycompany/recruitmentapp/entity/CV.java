@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.entity;
 
 import java.io.Serializable;
@@ -26,10 +21,11 @@ public class CV implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
     private String fileName;
     private String fileType;
     private byte[] fileContent;
-    
+
     @OneToOne
     @JoinColumn(name = "CANDIDATE_KEY")
     private Candidate candidate;
@@ -98,5 +94,5 @@ public class CV implements Serializable {
     public String toString() {
         return "com.mycompany.recruitmentapp.entity.CV[ id=" + id + " ]";
     }
-    
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.recruitmentapp.common;
 
 import com.mycompany.recruitmentapp.entity.Position;
@@ -14,19 +9,17 @@ import java.sql.Date;
  * @author lucis
  */
 public class CandidateDetails {
-    
     private Integer id;
-    
     private String firstName;
     private String lastName;
     private String phone;
     private String mail;
     private String address;
     private String comment;
-    private Date interviewDate; /* https://vladmihalcea.com/date-timestamp-jpa-hibernate/ */
+    private Date interviewDate;
     private Position position;
     private CV cv;
-    
+
     public CandidateDetails(Integer id, String firstName, String lastName, String phone, String mail, String address, String comment, Date interviewDate, Position position, CV cv) {
         this.id = id;
         this.firstName = firstName;
@@ -119,5 +112,4 @@ public class CandidateDetails {
     public void setCv(CV cv) {
         this.cv = cv;
     }
-    
 }
