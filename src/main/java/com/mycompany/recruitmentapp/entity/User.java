@@ -2,6 +2,7 @@ package com.mycompany.recruitmentapp.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class User implements Serializable {
     private String password;
     private String position;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     Collection<Position> openPositions;
 
     public Integer getId() {
