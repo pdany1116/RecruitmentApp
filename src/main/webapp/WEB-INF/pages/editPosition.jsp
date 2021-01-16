@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:pageTemplate pageTitle="Add Position">
+<t:pageTemplate pageTitle="Edit Position">
     <h1 style="padding-left: 650px;"> Edit Position </h1>
     <div style="padding-left: 500px;">
         <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditPosition">
@@ -19,8 +19,23 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="department">Department</label>
-                        <input type="text" class="form-control" id="department" name="department" placeholder="Department" required value="${position.department}" ><!-- comment -->
+                        <label for="lastName">Department</label>
+                        <!-- <input type="text" class="form-control" id="department" name="department" placeholder="" value="" required> comment -->
+                        <select class="custom-select d-block w-100" id="department" name="department" required>
+                            <option value="${position.department}">${position.department}</option><!-- comment -->
+                            <c:if test="${ position.department ne 'GBA'}">
+                            <option value="GBA">GBA</option><!-- comment -->
+                            </c:if>
+                            <c:if test="${ position.department ne 'GBC'}">
+                            <option value="GBC">GBC</option>
+                            </c:if>
+                            <c:if test="${ position.department ne 'MSA'}">
+                            <option value="GBC">MSA</option>
+                            </c:if>
+                            <c:if test="${ position.department ne 'MNG'}">
+                            <option value="GBC">MNG</option>
+                            </c:if>
+                        </select>
                         <div class="invalid-feedback">
                             Department is required
                         </div>
