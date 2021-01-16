@@ -17,6 +17,7 @@
                         <th>Name</th>
                         <th>Candidates</th>
                         <th>Author</th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,10 +32,13 @@
                                             ${position.name}
                                         </td>
                                         <td>
-                                            ${position.maxCandidates}
+                                            ${position.candidates.size()}/${position.maxCandidates}
                                         </td>
                                         <td>
                                             ${position.user.firstName} ${position.user.lastName}  
+                                        </td>
+                                        <td>
+                                            ${position.state}
                                         </td>
                                         <td>
                                             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
@@ -75,10 +79,13 @@
                                             ${position.name}
                                         </td>
                                         <td>
-                                            ${position.maxCandidates}
-                                        </td> 
+                                            ${position.candidates.size()}/${position.maxCandidates}
+                                        </td>
                                         <td>
-                                            ${position.user.firstName} ${position.user.lastName}
+                                            ${position.user.firstName} ${position.user.lastName}  
+                                        </td>
+                                        <td>
+                                            ${position.state}
                                         </td>
                                         <td>
                                             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/DetailsPosition?positionId=${position.id}" role="button">Details</a>
