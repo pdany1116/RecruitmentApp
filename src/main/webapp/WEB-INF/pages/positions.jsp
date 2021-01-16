@@ -47,7 +47,8 @@
                                                   <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditPosition?positionId=${position.id}" role="button">Edit</a>
                                               </td>
                                         </c:if>
-                                        <c:if test = "${position.state eq 'Active' && pageContext.request.isUserInRole('RecruiterRole')}">
+                                        <c:if test = "${position.state eq 'Active' && (pageContext.request.isUserInRole('RecruiterRole')|| 
+                                                                                       pageContext.request.isUserInRole('DirectorGeneralRole'))}">
                                             <td>
                                                 <a class="btn btn-secondary" href="${pageContext.request.contextPath}/AddCandidate?positionId=${position.id}" role="button">Add Candidate</a>
                                             </td>
