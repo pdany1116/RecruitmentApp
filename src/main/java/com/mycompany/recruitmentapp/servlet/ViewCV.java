@@ -32,20 +32,25 @@ public class ViewCV extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         CandidateDetails candidate = candidateBean.findById(id);
+        
+        if (candidate.getCv().getFileContent() != null) {
+            response.setContentType(candidate.getCv().getFileType());
+            response.setContentLength(candidate.getCv().getFileContent().length);
+            response.getOutputStream().write(candidate.getCv().getFileContent());
 
-        response.setContentType(candidate.getCv().getFileType());
-        response.setContentLength(candidate.getCv().getFileContent().length);
-        response.getOutputStream().write(candidate.getCv().getFileContent());
+            PrintWriter out = response.getWriter();
+            FileInputStream fileInputStream = new FileInputStream(candidate.getCv().getFileName());
 
-        PrintWriter out = response.getWriter();
-        FileInputStream fileInputStream = new FileInputStream(candidate.getCv().getFileName());
-
-        int i;
-        while ((i = fileInputStream.read()) != -1) {
-            out.write(i);
+            int i;
+            while ((i = fileInputStream.read()) != -1) {
+                out.write(i);
+            }
+            fileInputStream.close();
+            out.close();
         }
-        fileInputStream.close();
-        out.close();
+        else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
     }
 
     @Override
